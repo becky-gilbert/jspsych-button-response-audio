@@ -165,10 +165,8 @@
     function sound_ended() {
       if (context !== null) {
         sound_end_time = context.currentTime * 1000;
-        console.log("sound end time: ", sound_end_time);
       } else {
         sound_end_time = Date.now();
-        console.log("sound end time: ", sound_end_time);
       }
       if (trial.ignore_responses_during_audio) {
         $(':button').prop('disabled',false);
@@ -191,8 +189,6 @@
       }
       // rt since trial start using Date method
       response.rt = resp_time - start_time;
-      console.log("trial RT: ", response.rt);
-      console.log("audio RT: ", response.rt_audio);
       response.button = choice;
       
       $('.jspsych-btn').prop('disabled',true);
@@ -219,9 +215,6 @@
         if (response.rt_audio !== -1 && sound_end_time !== -1) {
           rt_from_audio_end = response.rt_audio - (sound_end_time - (start_time_audio*1000));
           audio_duration = sound_end_time - (start_time_audio*1000);
-          console.log("response made, sound ended");
-        } else {
-          console.log("no response and/or sound not ended");
         }
       } else {
         audio.removeEventListener('ended', end_trial);
@@ -254,7 +247,6 @@
     var start_time_audio;
     if(context !== null){
       start_time_audio = context.currentTime + 0.1;
-      console.log("audio start time: ", start_time_audio);
       source.start(start_time_audio);
     } else {
       start_time_audio = Date.now();
