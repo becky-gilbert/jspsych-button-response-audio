@@ -75,6 +75,11 @@
 
   plugin.trial = function(display_element, trial) {
 
+    // if any trial variables are functions
+    // this evaluates the function and replaces
+    // it with the output of the function
+    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
+
     // default parameters
     trial.choices = trial.choices || " ";
     trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
@@ -85,11 +90,6 @@
     trial.margin_vertical = trial.margin_vertical || "0px";
     trial.margin_horizontal = trial.margin_horizontal || "8px";
     trial.ignore_responses_during_audio = (typeof trial.ignore_responses_during_audio === 'undefined') ? false : trial.ignore_responses_during_audio;
-
-    // if any trial variables are functions
-    // this evaluates the function and replaces
-    // it with the output of the function
-    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
     // set up stimulus
     var context = jsPsych.pluginAPI.audioContext();
